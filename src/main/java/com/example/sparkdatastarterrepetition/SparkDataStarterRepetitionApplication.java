@@ -15,8 +15,9 @@ public class SparkDataStarterRepetitionApplication {
         try {
             ConfigurableApplicationContext context = SpringApplication.run(SparkDataStarterRepetitionApplication.class, args);
             CriminalRepository criminalRepository = context.getBean(CriminalRepository.class);
-            List<Criminal> criminals = criminalRepository.findByNumberGreaterThanSortByNumberAsc(13);
-            criminals.forEach(System.out::println);
+            List<Criminal> criminals = criminalRepository.findByNumberGreaterThan(13);
+            criminals.get(0).getOrders().forEach(System.out::println);
+            criminals.stream().map(Criminal::getOrders).forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -20,6 +20,7 @@ public class SparkInvocationHandlerImpl implements SparkInvocationHandler {
     private DataExtractor dataExtractor;
     private Map<Method, List<Tuple2<SparkTransformation, List<String>>>> transformationChain;
     private Map<Method, Finalizer> finalizerMap;
+    private FinalizerPostProcessor postProcessor;
 
     private ConfigurableApplicationContext context;
 
@@ -34,6 +35,6 @@ public class SparkInvocationHandlerImpl implements SparkInvocationHandler {
 
         Finalizer finalizer = finalizerMap.get(method);
         Object retVal = finalizer.doAction(dataset, modelClass, orderedBag);
-        return retVal;
+        return postProcessor.postFinalize(retVal);
     }
 }

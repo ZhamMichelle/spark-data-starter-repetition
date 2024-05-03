@@ -8,5 +8,7 @@ import java.util.List;
 public interface CriminalRepository extends SparkRepository<Criminal> {
     List<Criminal> findByNumberBetween(int min, int max);
     List<Criminal> findByNumberGreaterThan(int min);
-    List<Criminal> findByNumberGreaterThanSortByNumberAsc(int num);
+    List<Criminal> findByNumberGreaterThanOrderByNumber(int num);
+    long findByNumberGreaterThanOrderByNumberCount(int num);
+    List<Criminal> findByNumberGreaterThanOrderByNumberAndName(int num);  //does not work
 }
